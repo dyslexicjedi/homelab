@@ -32,3 +32,28 @@ This repository is a personal homelab project and is provided "as is" without wa
 
 
 The author(s) assume no responsibility for any damage, data loss, or issues that may arise from using this repository.
+
+## Cluster Setp
+
+### Setup Talos
+```
+talosctl gen config proxmox-cluster https://10.0.10.30:6443 -o cluster_config
+
+talosctl apply-config --nodes 10.0.10.30 --file cluster_config/controlplane.yaml --insecure
+
+talosctl apply-config --nodes 10.0.10.31 --file cluster_config/worker.yaml --insecure
+
+talosctl config endpoint 10.0.10.30
+talosctl config node 10.0.10.30
+
+talosctl bootstrap
+
+talosctl kubeconfig .
+```
+
+
+### Setup Flux
+
+```
+flux bootstrap github --components-extra=image-reflector-controller,image-automation-controller --owner=dyslexicjedi --repository=homelab --branch=main --path=clusters/homelab --personal --token-auth
+```
