@@ -20,14 +20,15 @@ The infrastructure is managed using GitOps principles, where:
 3. **Flux** continuously reconciles the desired state (defined in Git) with the actual cluster state
 
 ## Disclaimer
-+
-+**USE AT YOUR OWN RISK**
-+
-+This repository is a personal homelab project and is provided "as is" without warranty of any kind, express or implied. The configurations and code contained herein are specific to my environment and may not be suitable for your use case.
-+
-+- ⚠️ No warranty or guarantee of functionality
-+- ⚠️ Not intended as production-ready code
-+- ⚠️ Use at your own risk and discretion
-+- ⚠️ Always review and test configurations before applying to your infrastructure
-+
-+The author(s) assume no responsibility for any damage, data loss, or issues that may arise from using this repository.
+
+**USE AT YOUR OWN RISK**
+
+This repository is a personal homelab project and is provided "as is" without warranty of any kind, express or implied. The configurations and code contained herein are specific to my environment and may not be suitable for your use case.
+
+- ⚠️ No warranty or guarantee of functionality
+- ⚠️ Not intended as production-ready code
+- ⚠️ Use at your own risk and discretion
+- ⚠️ Always review and test configurations before applying to your infrastructure
+
+
+The author(s) assume no responsibility for any damage, data loss, or issues that may arise from using this repository.
