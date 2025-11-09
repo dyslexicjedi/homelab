@@ -6,3 +6,12 @@ metadata:
 spec:
   addresses:
   - 10.0.10.40/29
+---
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: cheap-l2
+  namespace: metallb-system
+spec:
+  ipAddressPools:
+  - cheap
