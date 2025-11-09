@@ -22,10 +22,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-deployment
+  name: nginx-service
+  namespace: nginx-service
   labels:
-    app: nginx-deployment
-    kubernetes.io/name: "nginx-deployment"
+    app: nginx-service
+    kubernetes.io/name: "nginx-service"
 spec:
   selector:
     app: nginx-deployment
