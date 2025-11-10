@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-tvshows-pv
+  namespace: media
+spec:
+  capacity:
+    storage: 34Ti
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: nfs
+  mountOptions:
+    - hard
+  nfs:
+    path: /mnt/vault/TVShows
+    server: 10.0.10.7
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-movies-pv
+  namespace: media
+spec:
+  capacity:
+    storage: 34Ti
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: nfs
+  mountOptions:
+    - hard
+  nfs:
+    path: /mnt/vault/Movies
+    server: 10.0.10.7
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-downloads-pv
+  namespace: media
+spec:
+  capacity:
+    storage: 800Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: nfs
+  mountOptions:
+    - hard
+  nfs:
+    path: /mnt/vault/Sync
+    server: 10.0.10.7
