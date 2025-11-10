@@ -4,3 +4,4 @@ resources:
 - namespace.yml
 - sonarr.yml
 - prowlarr.yml
+- jellyfin.yml
