@@ -6,7 +6,6 @@ This repository contains an Infrastructure as Code (IaC) implementation for a mo
 
 This implementation leverages:
 
-- **[Talos OS](https://www.talos.dev/)**: A modern, secure, and immutable Linux distribution designed specifically for Kubernetes
 - **[Kubernetes](https://kubernetes.io/)**: Container orchestration platform for automating deployment, scaling, and management of containerized applications
 - **[Flux](https://fluxcd.io/)**: GitOps toolkit for keeping Kubernetes clusters in sync with configuration sources
 
@@ -15,9 +14,8 @@ This implementation leverages:
 
 The infrastructure is managed using GitOps principles, where:
 
-1. **Talos OS** provides the minimal, secure operating system layer optimized for running Kubernetes
-2. **Kubernetes** serves as the orchestration platform for containerized workloads
-3. **Flux** continuously reconciles the desired state (defined in Git) with the actual cluster state
+1. **Kubernetes** serves as the orchestration platform for containerized workloads
+2. **Flux** continuously reconciles the desired state (defined in Git) with the actual cluster state
 
 ## Disclaimer
 
@@ -33,26 +31,30 @@ This repository is a personal homelab project and is provided "as is" without wa
 
 The author(s) assume no responsibility for any damage, data loss, or issues that may arise from using this repository.
 
-## Cluster Setp
+## Cluster Setup
 
-### Setup Talos
+### ubuntu Nodes
+
+Control Node
 ```
-talosctl gen config proxmox-cluster https://10.0.10.30:6443 -o cluster_config
+#Install w/o Traefik
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--disable traefik" K3S_KUBECONFIG_MODE="644" sh -
 
-talosctl apply-config --nodes 10.0.10.30 --file cluster_config/controlplane.yaml --insecure
+#Get Token
+cat /var/lib/rancher/k3s/server/node-token
 
-talosctl apply-config --nodes 10.0.10.31 --file cluster_config/worker.yaml --insecure
-
-talosctl config endpoint 10.0.10.30
-talosctl config node 10.0.10.30
-
-talosctl bootstrap
-
-talosctl kubeconfig .
 ```
 
+Worker Nodes
+```
+#Install
+curl -sfL https://get.k3s.io | K3S_URL=https://<ip>:6443 K3S_TOKEN=<token> sh -
+```
 
 ### Setup Flux
+Note: This seems to work better if you remove the deployments (aka the apps) first, let it come up and stablize, reboot may be neccessary. Setup what you want in longhorn, then add in the deployments.
+
+Discord: You will need to create a secret called discord-url in the flux-system namespace.
 
 ```
 flux bootstrap github --components-extra=image-reflector-controller,image-automation-controller --owner=dyslexicjedi --repository=homelab --branch=main --path=clusters/homelab --personal --token-auth
