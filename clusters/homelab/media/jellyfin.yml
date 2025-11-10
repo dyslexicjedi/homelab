@@ -33,38 +33,6 @@ spec:
     requests:
       storage: 25Gi
 ---
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: jellyfin-tv-pvc
-  namespace: media
-  labels:
-    type: nfs
-    app: jellyfin
-spec:
-  storageClassName: nfs
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 34Ti
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: jellyfin-movies-pvc
-  namespace: media
-  labels:
-    type: nfs
-    app: jellyfin
-spec:
-  storageClassName: nfs
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 34Ti
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -112,10 +80,10 @@ spec:
           claimName: jellyfin-pv-claim
       - name: jellyfin-tv-storage
         persistentVolumeClaim:
-          claimName: jellyfin-tv-pvc
+          claimName: nfs-tv-pvc
       - name: jellyfin-movies-storage
         persistentVolumeClaim:
-          claimName: jellyfin-movies-pvc
+          claimName: nfs-movies-pvc
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress

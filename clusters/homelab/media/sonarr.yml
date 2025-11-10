@@ -33,38 +33,6 @@ spec:
     requests:
       storage: 25Gi
 ---
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: sonarr-tv-pvc
-  namespace: media
-  labels:
-    type: nfs
-    app: sonarr
-spec:
-  storageClassName: nfs
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 34Ti
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: sonarr-download-pvc
-  namespace: media
-  labels:
-    type: nfs
-    app: sonarr
-spec:
-  storageClassName: nfs
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 800Gi
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -112,10 +80,10 @@ spec:
           claimName: sonarr-pv-claim
       - name: sonarr-tv-storage
         persistentVolumeClaim:
-          claimName: sonarr-tv-pvc
+          claimName: nfs-tv-pvc
       - name: sonarr-download-storage
         persistentVolumeClaim:
-          claimName: sonarr-download-pvc
+          claimName: nfs-download-pvc
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress

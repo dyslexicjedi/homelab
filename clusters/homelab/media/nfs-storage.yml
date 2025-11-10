@@ -54,3 +54,51 @@ spec:
   nfs:
     path: /mnt/vault/Sync
     server: 10.0.10.7
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-download-pvc
+  namespace: media
+  labels:
+    type: nfs
+spec:
+  storageClassName: nfs
+  volumeName: nfs-downloads-pv
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 800Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-tv-pvc
+  namespace: media
+  labels:
+    type: nfs
+spec:
+  storageClassName: nfs
+  volumeName: nfs-tvshows-pv
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 34Ti
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-movies-pvc
+  namespace: media
+  labels:
+    type: nfs
+spec:
+  storageClassName: nfs
+  volumeName: nfs-movies-pv
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 34Ti
