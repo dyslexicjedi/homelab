@@ -93,7 +93,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: sonarr.dyslexicjedi.com
+  - host: sonarr2.dyslexicjedi.com
     http:
       paths:
       - path: /

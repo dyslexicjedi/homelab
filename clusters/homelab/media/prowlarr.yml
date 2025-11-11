@@ -83,7 +83,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: prowlarr.dyslexicjedi.com
+  - host: prowlarr2.dyslexicjedi.com
     http:
       paths:
       - path: /
